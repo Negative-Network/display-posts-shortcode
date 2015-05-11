@@ -20,6 +20,8 @@
  * @copyright Copyright (c) 2011, Bill Erickson
  * @link http://www.billerickson.net/shortcode-to-display-posts/
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * 
+ * @author Modified by Pierre Blarre, on the 11th May 2015, for Negative Network SARL <pierre@negative-network.com>
  */
  
  
@@ -415,6 +417,7 @@ function be_display_posts_shortcode( $atts ) {
 		}
 		
 		// Display categories the post is in
+		$category_display_text = '';
 		if( $category_display && is_object_in_taxonomy( get_post_type(), $category_display ) ) {
 			$terms = get_the_terms( get_the_ID(), $category_display );
 			$term_output = array();
