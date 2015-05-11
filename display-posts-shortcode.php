@@ -639,3 +639,38 @@ function be_display_posts_off( $out, $pairs, $atts ) {
 	$out['display_posts_off'] = apply_filters( 'display_posts_shortcode_inception_override', true );
 	return $out;
 }
+
+/** 
+ * Exclude Posts
+ *
+ * @param array $args
+ * @param array $atts
+ * @return array $args
+ */
+function be_display_posts_shortcode_exclude_posts( $args, $atts ) {
+	if( isset( $atts['not_in'] ) ) {
+		$posts = explode( ',', $atts['not_in'] );
+		$args['post__not_in'] = $posts;
+	}
+		
+	return $args;
+}
+add_filter( 'display_posts_shortcode_args', 'be_display_posts_shortcode_exclude_posts', 10, 2 );
+
+
+/** 
+ * Exclude Post Categories
+ *
+ * @param array $args
+ * @param array $atts
+ * @return array $args
+ */
+function be_display_posts_shortcode_exclude_categories( $args, $atts ) {
+	if( isset( $atts['not_in_cat'] ) ) {
+		$categories = explode( ',', $atts['not_in_cat'] );
+		$args['category__not_in'] = $categories;
+	}
+		
+	return $args;
+}
+add_filter( 'display_posts_shortcode_args', 'be_display_posts_shortcode_exclude_categories', 10, 2 );
